@@ -7,7 +7,7 @@
 
   function publisher() {
     var component = {
-      templateUrl: "./publisher.component.html",
+      templateUrl: "/src/publisher.component.html",
       controller: PublisherComponentController,
     };
 
@@ -36,17 +36,21 @@
     // HQTT
     vm.topic = "sensorData/#";
 
+    // Other
+    vm.loading = true;
+
 
     /****************************************************************
                         Controller Methods
     ****************************************************************/
 
     function $onInit() {
-      eventDispatcherService.subscribe(vm.topic, function(responseObject) {
+      eventDispatcherService.subscribeTopic(vm.topic, function(responseObject) {
         console.log("onConnectionLost:" + responseObject.errorMessage);
       },
       function(message) {
         console.log("onMessageArrived:" + message.payloadString);
+        vm.loading = false;
       });
     }
   }

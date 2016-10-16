@@ -1,12 +1,12 @@
 <html>
   <head>
     <!-- Dependencies -->
-    <script src="./node_modules/mqtt/browserMqtt.js"></script>
     <script src="./src/mqttws31.js"></script>
     <script src="./node_modules/angular/angular.js"></script>
     <script src="./node_modules/angular-animate/angular-animate.js"></script>
     <script src="./node_modules/angular-aria/angular-aria.js"></script>
     <script src="./node_modules/angular-material/angular-material.js"></script>
+    <link rel="stylesheet" href="./node_modules/angular-material/angular-material.min.css"></script>
 
     <!-- Application Code -->
     <script src="./src/app.js"></script>
@@ -16,9 +16,11 @@
   </head>
   <body>
 
-    <ng-app="engageableApp">
-      <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-    </ng-app>
+    <div ng-app="engageableApp">
+
+      <publisher></publisher>
+
+    </div>
 
   </body>
 
