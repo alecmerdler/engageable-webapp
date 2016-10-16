@@ -50,13 +50,6 @@
 
     function $onInit() {
       vm.events = eventDispatcherService.getEvents();
-      eventDispatcherService.subscribeTopic(vm.topic, function(responseObject) {
-        console.log("onConnectionLost:" + responseObject.errorMessage);
-      },
-      function(message) {
-        console.log("onMessageArrived:" + message.payloadString);
-        vm.loading = false;
-      });
     }
 
 
