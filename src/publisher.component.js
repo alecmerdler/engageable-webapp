@@ -32,9 +32,13 @@
 
     // Methods
     vm.$onInit = $onInit;
+    vm.publishMessage = publishMessage;
 
     // HQTT
-    vm.topic = "sensorData/#";
+    vm.topic = "sensorData";
+
+    // Events
+    vm.events = [];
 
     // Other
     vm.loading = true;
@@ -45,6 +49,7 @@
     ****************************************************************/
 
     function $onInit() {
+      vm.events = eventDispatcherService.getEvents();
       eventDispatcherService.subscribeTopic(vm.topic, function(responseObject) {
         console.log("onConnectionLost:" + responseObject.errorMessage);
       },
@@ -52,6 +57,11 @@
         console.log("onMessageArrived:" + message.payloadString);
         vm.loading = false;
       });
+    }
+
+
+    function publishMessage(event) {
+      eventDispatcherService.publishMessage(vm.topic, event);
     }
   }
 

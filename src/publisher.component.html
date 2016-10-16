@@ -1,4 +1,20 @@
-<md-progress-circular
-  ng-if="$ctrl.loading == true"
-  md-mode="indeterminate">
-</md-progress-circular>
+<div class="md-padding">
+  <md-toolbar md-scroll-shrink>
+    <div class="md-toolbar-tools">EngageAble MQTT Publisher Console</div>
+  </md-toolbar>
+
+  <div layout="row">
+    <md-whiteframe
+      class="md-whiteframe-8dp" flex-gt-md="100" layout layout-align="center center">
+      <div
+        flex="10" layout="column" layout-align="start start">
+        <md-button
+          class="md-primary md-raised"
+          ng-repeat="event in $ctrl.events"
+          ng-click="$ctrl.publishMessage(event)">
+          <span ng-bind="event.id"></span>
+        </md-button>
+      </div>
+    </md-whiteframe>
+  </div>
+</div>

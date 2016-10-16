@@ -28,6 +28,7 @@
     var eventDispatcherService = {
       subscribeTopic: subscribeTopic,
       publishMessage: publishMessage,
+      getEvents: getEvents,
     };
 
     return eventDispatcherService;
@@ -49,10 +50,43 @@
     }
 
 
-    function publishMessage(topic, string) {
-      var message = new Paho.MQTT.Message(string);
+    function publishMessage(topic, payload) {
+      var client = new Paho.MQTT.Client(hqttBrokerUrl.hostname, Number(hqttBrokerUrl.port), "clientId");
+      var message = new Paho.MQTT.Message(angular.toJson(payload));
       message.destinationName = topic;
-      client.send(message);
+
+      client.connect({onSuccess: function() {
+        client.send(message);
+      }});
+
+    }
+
+
+    function getEvents() {
+      var events = [
+        {
+          'id': 0,
+          'eventType': 0
+        },
+        {
+          'id': 1,
+          'eventType': 1
+        },
+        {
+          'id': 2,
+          'eventType': 2
+        },
+        {
+          'id': 3,
+          'eventType': 3
+        },
+        {
+          'id': 4,
+          'eventType': 4
+        }
+      ];
+
+      return events;
     }
 
 
