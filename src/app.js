@@ -1,13 +1,20 @@
 (function() {
   'use strict';
 
-    var client = mqtt.connect("ws://52.25.184.170:8080");
-    client.on("connect", function() {
-      client.subscribe("sensorData");
-    });
+  angular
+    .module("engageableApp", [
+      "ngMaterial",
+    ])
+    .config(config);
 
-    client.on("message", function(topic, message) {
-      console.log(message.toString());
-      client.end();
-    });
+    config.$inject = [
+      "$httpProvider",
+    ];
+
+    function config($httpProvider) {
+      // CSRF configuration
+      $httpProvider.defaults.xsrfCookieName = 'csrftoken';
+      $httpProvider.defaults.xsrfHeaderName = 'X-CSRFToken';
+    }
+
 }());
